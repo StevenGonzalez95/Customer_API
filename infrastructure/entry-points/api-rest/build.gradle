@@ -1,0 +1,17 @@
+dependencies {
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation project(':usecase')
+    implementation project(':model')
+
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.1'
+    compile "org.glassfish:javax.el:3.0.0"
+
+    implementation 'org.jetbrains:annotations:15.0'
+    compile "org.glassfish:javax.el:3.0.0"
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('io.projectreactor:reactor-test')
+
+}

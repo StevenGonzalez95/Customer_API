@@ -1,0 +1,106 @@
+subprojects {
+    apply plugin: "java"
+    apply plugin: "jacoco"
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+  		 mavenCentral()
+         maven { url "https://repo.spring.io/snapshot" }
+         maven { url "https://repo.spring.io/milestone" }
+         //maven {url "https://artifactory.apps.bancolombia.com/maven-bancolombia"}
+    }
+
+    dependencies {
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'io.projectreactor:reactor-test'
+
+        implementation 'io.projectreactor:reactor-core'
+        implementation 'io.projectreactor.addons:reactor-extra'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+    }
+
+    jacoco {
+        toolVersion = '0.8.2'
+    }
+
+
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    def jacocoExcludes = []
+    def jacocoIncludes = []
+
+    jacocoTestReport {
+        doFirst {
+            classDirectories = fileTree(dir: "build/classes/java/main/").exclude(jacocoExcludes).include(jacocoIncludes)
+        }
+        reports {
+            html.enabled = true
+            html.setDestination(file("${buildDir}/jacocoHtml"))
+            xml.enabled = true
+            xml.setDestination(file("${buildDir}/summary.xml"))
+
+        }
+    }
+
+    test {
+        finalizedBy jacocoTestReport
+        jacoco {
+            append = true
+            destinationFile = file("CCReport43F6D5EF/jacoco.exec")
+        }
+    }
+
+    task copyReport(type: Copy) {
+        from "build/test-results"
+        into "$rootDir/build/test-results/"
+    }
+    test.finalizedBy(copyReport)
+
+
+}
+
+
+allprojects {
+
+    apply plugin: 'jacoco'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        //maven { url "https://artifactory.apps.bancolombia.com/maven-bancolombia" }
+    }
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+    dependsOn = subprojects.test
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
+    }
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        xml.setDestination(file("CCReport43F6D5EF/summary.xml"))
+        html.destination(file("CCReport43F6D5EF/"))
+    }
+}

@@ -1,0 +1,18 @@
+apply plugin: 'org.springframework.boot'
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.1'
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+
+    implementation project(':model')
+    implementation project(':usecase')
+    implementation project(':api-rest')
+    implementation project(':reactive-rest')
+
+runtime('org.springframework.boot:spring-boot-devtools')
+}
+jar {
+    archivesBaseName = rootProject.name
+    libsDirName = project(":").getBuildDir()
+}

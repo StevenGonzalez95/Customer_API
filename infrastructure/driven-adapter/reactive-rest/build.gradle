@@ -1,0 +1,23 @@
+dependencies {
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    implementation project(':model')
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.10.1'
+    compile "org.glassfish:javax.el:3.0.0"
+
+    implementation 'org.jetbrains:annotations:15.0'
+    compile "org.glassfish:javax.el:3.0.0"
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('io.projectreactor:reactor-test')
+
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.487'
+    compile group: 'xerces', name: 'xercesImpl', version: '2.12.0'
+    compile group: 'net.spy', name: 'spymemcached', version: '2.10.3'
+    compile 'com.amazonaws:aws-java-sdk-dynamodb:1.11.741'
+    compile 'com.github.derjust:spring-data-dynamodb:5.1.0'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.741'
+
+}
