@@ -1,8 +1,1 @@
-#spring.application.name=AW0360010_SVE_CGC_authentication_management
-services.apiconnect.user: David
-services.apiconnect.pass: Giraldo
-services.apiconnect.hostName: http://localhost:8082/bancolombiafeapi-prod/testing/v1/
-services.apiconnect.contentType: application/vnd.bancolombia.v1+json
-services.backend.colombia: https://cnxbancolombia.apps.ambientesbc.com:4443/BOLEPQA2/OLBServlet #https://virtualesqa2.bancolombia.corp/BOLEPQA2/OLBServlet #
-services.backend.filiales: https://servfeexcert.bancolombia.corp/web-enrolamiento/AutenticacionFiliales
 
