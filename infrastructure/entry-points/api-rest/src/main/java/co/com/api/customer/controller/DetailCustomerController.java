@@ -94,7 +94,7 @@ public class DetailCustomerController {
         CustomerInfo customerInfo = new CustomerInfo();
         BeanUtils.copyProperties(customerRQ.getData().get(0).getParam(),customerInfo);
 
-        return customerUseCase.transaction(new CustomerInfo(), "add")
+        return customerUseCase.transaction(customerInfo, "update")
                 .map(response -> {
                     return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON)
                             .body(responseData(response,customerRQ));
