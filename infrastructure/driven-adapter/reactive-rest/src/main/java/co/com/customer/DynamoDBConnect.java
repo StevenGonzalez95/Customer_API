@@ -171,14 +171,11 @@ public class DynamoDBConnect implements Database {
       return  infomap;
     }
 
-
-
     private static AmazonDynamoDB   dynamoDBClient(){
         return AmazonDynamoDBClientBuilder.standard().withEndpointConfiguration(
                 new AwsClientBuilder.EndpointConfiguration("http://localhost:8000/", "ap-southeast-2"))
                 .build();
     }
-
 
     private static  DynamoDB dynamoDB (AmazonDynamoDB dynamoDBClient){ return new DynamoDB(dynamoDBClient);
     }
