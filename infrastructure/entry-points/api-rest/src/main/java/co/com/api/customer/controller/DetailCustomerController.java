@@ -39,7 +39,7 @@ public class DetailCustomerController {
     private CustomerUseCase customerUseCase;
 
 
-    @PostMapping("/customerAdd")
+    @PostMapping("/customer")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Object>> detailsDepositsAccount(@RequestBody CustomerRQ customerRQ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -54,7 +54,7 @@ public class DetailCustomerController {
          });
     }
 
-    @DeleteMapping("/customerDelete")
+    @DeleteMapping("/customer")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Object>> deleteCustomer(@RequestBody CustomerRQ customerRQ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -69,7 +69,7 @@ public class DetailCustomerController {
                 });
     }
 
-    @GetMapping("/customerInfo")
+    @GetMapping("/customer")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Object>> getCustomer(@RequestBody CustomerRQ customerRQ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -85,7 +85,7 @@ public class DetailCustomerController {
                 });
     }
 
-    @PutMapping("/customerUpdate")
+    @PutMapping("/customer")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Object>> updateCustomer(@RequestBody CustomerRQ customerRQ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
