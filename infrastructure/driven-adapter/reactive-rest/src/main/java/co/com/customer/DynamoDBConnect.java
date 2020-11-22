@@ -23,7 +23,7 @@ import java.util.Map;
 public class DynamoDBConnect implements Database {
 
     DynamoDB dynamoDB = dynamoDB(dynamoDBClient());
-    Table table = dynamoDB.getTable("dev-dynamo-customer");
+    Table credentials = dynamoDB.getTable("dev-dynamo-customer");
 
 
     @Override
@@ -45,7 +45,7 @@ public class DynamoDBConnect implements Database {
 
         GetItemSpec spec = new GetItemSpec().withPrimaryKey("id",customerInfo.getId(),"docType", customerInfo.getDocType());
         try {
-            Item outcome = table.getItem(spec);
+            Item outcome = credentials.getItem(spec);
             if (outcome != null) {
                 Map<String, Object> info =outcome.asMap();
                 return info;
@@ -81,7 +81,7 @@ public class DynamoDBConnect implements Database {
         infomAp.put("state",customerInfo.getState());
         infomAp.put("street",customerInfo.getStreet());
 
-        PutItemOutcome outcome = table.putItem(new Item()
+        PutItemOutcome outcome = credentials.putItem(new Item()
                 .withPrimaryKey("id",customerInfo.getId(),"docType",customerInfo.getDocType())
                 .withMap("info",infomAp));
 
@@ -97,7 +97,7 @@ public class DynamoDBConnect implements Database {
 
         try {
             DeleteItemSpec spec = new DeleteItemSpec().withPrimaryKey("id", customerInfo.getId(), "docType", customerInfo.getDocType());
-            DeleteItemOutcome outcome = table.deleteItem(spec);
+            DeleteItemOutcome outcome = credentials.deleteItem(spec);
 
             if (outcome.getDeleteItemResult() != null) {
                 infomap.clear();
@@ -160,7 +160,7 @@ public class DynamoDBConnect implements Database {
                 .withReturnValues(ReturnValue.UPDATED_NEW);
 
         try{
-            UpdateItemOutcome outcome = table.updateItem(update);
+            UpdateItemOutcome outcome = credentials.updateItem(update);
             if(outcome != null)
                 infomap.put("stateUpdate", "Success");
 
